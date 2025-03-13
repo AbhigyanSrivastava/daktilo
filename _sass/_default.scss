@@ -1,17 +1,32 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+sitemap:
+  exclude: 'yes'
+---
+@charset "utf-8";
+
+/* =Colors */
+$background-dark: #111111;
+$text-light: #eeeeee;
+$primary: #ffcc00;  // Bright color for links & highlights
+$secondary: #888888; // Dimmer text for less important elements
+
+@import "mixins", "default", "404";
+
 /* =Base */
 body {
-    font-family: 'Inconsolata', ;
-    color: $iron;
-    background-color: $dorian;
+    font-family: 'Inconsolata', monospace;
+    color: $text-light;
+    background-color: $background-dark;
 }
 
 a {
-    color: $cloudy;
+    color: $primary;
     font-weight: bold;
     text-decoration: none;
 
     &:hover {
-
+        color: lighten($primary, 20%);
     }
 }
 
@@ -28,10 +43,11 @@ img {
 
 blockquote {
     letter-spacing: 3px;
-    margin:0px;
-    margin-top: 40px;
-    margin-bottom: 70px;
-    padding: 0px;
+    margin: 40px 0 70px;
+    padding: 20px;
+    background: #222222; // Darker blockquote background
+    border-left: 5px solid $primary;
+    color: $secondary;
     text-align: center;
     position: relative;
 
@@ -39,9 +55,9 @@ blockquote {
         position: absolute;
         bottom: -35px;
         font-size: 15px;
-        color: $iron;
+        color: $text-light;
         letter-spacing: 0px;
-        left:0px;
+        left: 0px;
         right: 0px;
 
         &:before { content: "** "; }
@@ -51,7 +67,7 @@ blockquote {
     p {
         display: inline;
         font-size: 20px;
-        color: $cloudy;
+        color: $primary;
         font-weight: 400;
         &:before { content: "“ "; }
         &:after { content: " ”"; }
@@ -59,12 +75,12 @@ blockquote {
 }
 
 strong {
-    color: $iron;
+    color: $primary;
 }
 
 /* =Header */
 .wrapper {
-    max-width: 800px;
+    max-width: 900px;
     margin: 100px auto;
 }
 
@@ -73,22 +89,21 @@ strong {
 }
 
 .navigation {
-    float:left;
+    float: left;
 }
 
 .logo {
     font-size: 50px;
     font-weight: 700;
-    color: $iron;
+    color: $text-light;
     display: block;
 }
 
 .menu {
-    color: $cloudy;
+    color: $text-light;
     font-size: 18px;
-    margin:0px;
-    margin-top: 6px;
-    padding: 0px;
+    margin: 6px 0 0;
+    padding: 0;
     list-style-type: none;
 }
 
@@ -106,9 +121,9 @@ strong {
 }
 
 .social-links {
-    float:right;
+    float: right;
     font-size: 24px;
-    color: $cloudy;
+    color: $primary;
     list-style-type: none;
 }
 
@@ -119,20 +134,20 @@ strong {
 
 /* =Titles */
 .page-title {
-    margin-top:100px;
-    margin-bottom:125px;
+    margin: 100px 0 125px;
     text-align: center;
 }
 
 .page-title__text {
     font-weight: 700;
     font-size: 70px;
+    color: $text-light;
 }
 
 .page-title__subtitle {
     font-weight: 400;
     font-size: 22px;
-    color: $cloudy;
+    color: $secondary;
 }
 
 .post-title {
@@ -148,7 +163,6 @@ strong {
 }
 
 /* =Post teasers */
-
 .list-posts {
     list-style-type: none;
     padding: 0px;
@@ -161,27 +175,27 @@ strong {
 
 .post-teaser__title {
     font-size: 22px;
-    color: $iron;
+    color: $text-light;
 }
 
 .post-teaser__date {
     font-size: 16px;
     float: right;
     vertical-align: middle;
-    color: $cloudy;
+    color: $secondary;
 }
 
 .empty-post-list {
     font-size: 22px;
     font-weight: 700;
-    color: $iron;
+    color: $text-light;
     text-align: center;
 }
 
 /* =Explore */
 .explore {
     text-align: center;
-    color: $cloudy;
+    color: $secondary;
     margin-top: 140px;
 }
 
@@ -208,13 +222,13 @@ strong {
 }
 
 .categories__item a {
-    color: $iron;
+    color: $text-light;
 }
 
 .categories__item:after {
     content: "/";
     margin-left: 6px;
-    color: $cloudy;
+    color: $secondary;
 }
 
 .categories__item:last-child:after {
@@ -222,10 +236,9 @@ strong {
     margin-left: 0px;
 }
 
-
 /* =Post page */
 .about {
-    color: $cloudy;
+    color: $secondary;
     margin-top: 70px;
     text-align: center;
     line-height: 24px;
@@ -245,20 +258,21 @@ strong {
     margin-top: 100px;
 }
 
+/* =Responsive Design */
 @media (max-width: 800px) {
-    /* =Base */
     p {
         font-size: 16px;
         line-height: 1.6;
     }
 
     .wrapper {
-        width: 80%;
+        width: 90%;
     }
 
     .navigation,
     .social-links {
-        @include centered-block();
+        text-align: center;
+        display: block;
     }
 
     .social-links {
@@ -281,14 +295,16 @@ strong {
 
     .post-teaser__title {
         font-size: 18px;
-        @include centered-block();
+        text-align: center;
+        display: block;
     }
 
     .post-teaser__date {
         font-size: 16px;
         margin-top: 10px;
         float: none;
-        @include centered-block();
+        text-align: center;
+        display: block;
     }
 
     .explore {
